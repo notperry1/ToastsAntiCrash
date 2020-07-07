@@ -55,6 +55,7 @@ public class ConfigManager {
 
 
     public static boolean unequipElytra() { return config.getBoolean("elytra.unequip"); }
+    public boolean elytraDisableSprint() {return config.getBoolean("elytra.no-sprint"); }
 
 
     public static int getRedstoneDisableTps() {

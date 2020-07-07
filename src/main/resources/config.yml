@@ -7,6 +7,7 @@ config-version: 2
 elytra:
   disable-tps: 17
   unequip: false
+  no-sprint: true
   rocket-cooldown: 15
   cooldown-message: '&cPlease wait &4%time% &cseconds before using this again'
 

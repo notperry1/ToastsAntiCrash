@@ -1,0 +1,7 @@
+name: ToastsAntiCrash
+version: @version@
+main: net.cb2k.toastsanticrash.Main
+commands:
+  anticrash:
+    description: ToastsAntiCrash
+    usage: /anticrash

@@ -1,5 +1,6 @@
-package net.cb2k.toastsanticrash;
+package net.cb2k.toastsanticrash.Utils;
 
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.plugin.Plugin;
@@ -46,7 +47,16 @@ public class ConfigManager {
     public static int getElytraDisableTps() {
         return config.getInt("elytra.disable-tps");
     }
+    public int getElytraCooldown() {return config.getInt("elytra.rocket-cooldown"); }
+
+    public String getCooldownMessage(Integer time) {
+        return ChatColor.translateAlternateColorCodes('&', config.getString("elytra.cooldown-message").replace("%time%", time.toString()));
+    }
+
+
     public static boolean unequipElytra() { return config.getBoolean("elytra.unequip"); }
+
+
     public static int getRedstoneDisableTps() {
         return config.getInt("redstone.disable-tps");
     }

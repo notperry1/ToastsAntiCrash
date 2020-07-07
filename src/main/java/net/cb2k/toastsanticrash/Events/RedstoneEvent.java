@@ -1,6 +1,6 @@
 package net.cb2k.toastsanticrash.Events;
 
-import net.cb2k.toastsanticrash.ConfigManager;
+import net.cb2k.toastsanticrash.Utils.ConfigManager;
 import net.cb2k.toastsanticrash.Main;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

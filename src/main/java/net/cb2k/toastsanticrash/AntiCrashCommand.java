@@ -1,5 +1,6 @@
 package net.cb2k.toastsanticrash;
 
+import net.cb2k.toastsanticrash.Utils.ConfigManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

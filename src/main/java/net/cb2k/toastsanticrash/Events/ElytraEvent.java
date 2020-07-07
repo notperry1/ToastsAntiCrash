@@ -1,7 +1,8 @@
 package net.cb2k.toastsanticrash.Events;
 
-import net.cb2k.toastsanticrash.ConfigManager;
 import net.cb2k.toastsanticrash.Main;
+import net.cb2k.toastsanticrash.Utils.ConfigManager;
+import net.cb2k.toastsanticrash.Utils.CooldownManager;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -9,16 +10,26 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class ElytraEvent implements Listener {
 
     private final int TPS;
+    public final CooldownManager cooldownManager = new CooldownManager();
+    private ConfigManager configManager = ConfigManager.getInstance();
+    private final Main plugin;
+
 
     public ElytraEvent(Main main) {
+        this.plugin = main;
         TPS = (int) Main.tps;
+
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -53,5 +64,45 @@ public class ElytraEvent implements Listener {
                 player.updateInventory();
             }
         }
+    }
+
+    @EventHandler
+    public void onPlayerInteractEvent(PlayerInteractEvent e) {
+        PlayerInventory inv = e.getPlayer().getInventory();
+        int timeLeft = cooldownManager.getCooldown(e.getPlayer());
+
+        if(e.getPlayer().hasPermission("speedlimiter.bypass") || e.getPlayer().hasPermission("speedlimit.bypass")) return;
+        if(configManager.getElytraCooldown() == -1) return;
+
+        if(e.getAction() == Action.RIGHT_CLICK_AIR) {
+            if(inv.getItemInMainHand().getType() == Material.FIREWORK || inv.getItemInOffHand().getType() == Material.FIREWORK) {
+                if(inv.getArmorContents()[2].getType() == Material.ELYTRA) {
+                    if(timeLeft == 0) {
+                        cooldownManager.setCooldown(e.getPlayer(), configManager.getElytraCooldown());
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                int timeLeft = cooldownManager.getCooldown(e.getPlayer());
+                                cooldownManager.setCooldown(e.getPlayer(), --timeLeft);
+                                if(timeLeft == 0) {
+                                    cancel();
+                                }
+                            }
+                        }.runTaskTimer(this.plugin, 20, 20);
+                    } else {
+                        String message = configManager.getCooldownMessage(cooldownManager.getCooldown(e.getPlayer()));
+                        e.getPlayer().sendTitle("", message, 10, 70, 20);
+                        e.setCancelled(true);
+                    }
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    public void onPlayerToggleFlightEvent(PlayerToggleFlightEvent e) {
+        if(e.getPlayer().hasPermission("speedlimiter.bypass") || e.getPlayer().hasPermission("speedlimit.bypass")) return;
+        if(e.getPlayer().isFlying()) return;
+        if(e.getPlayer().isSprinting()) e.getPlayer().setSprinting(false);
     }
 }

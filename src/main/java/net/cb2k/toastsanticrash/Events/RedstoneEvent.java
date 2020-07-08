@@ -10,6 +10,7 @@ import org.bukkit.event.block.BlockRedstoneEvent;
 public class RedstoneEvent implements Listener {
 
     private final int TPS;
+    private ConfigManager configManager;
 
     public RedstoneEvent(Main main) {
         TPS = (int) Main.tps;
@@ -17,7 +18,8 @@ public class RedstoneEvent implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onRedstone(BlockRedstoneEvent event){
-        if(TPS < ConfigManager.getRedstoneDisableTps()) {
+        configManager = configManager.getInstance();
+        if(TPS <= configManager.getRedstoneDisableTps()) {
             event.setNewCurrent(0);
         }
     }

@@ -7,7 +7,6 @@ config-version: 2
 elytra:
   disable-tps: 17
   unequip: false
-  no-sprint: true
   rocket-cooldown: 15
   cooldown-message: '&cPlease wait &4%time% &cseconds before using this again'
 
@@ -47,3 +46,14 @@ mobs:
     1: 0
     0: 0
 
+# Put player names who you want to be able to change gamemode
+allow-creative:
+  - RemainingToast
+  - 1JSL
+  - crunchball
+
+# Material for blocked blocks and items
+# Find these here https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+blocked-blocks:
+  - BARRIER
+  - BEDROCK

@@ -3,5 +3,8 @@ version: @version@
 main: net.cb2k.toastsanticrash.Main
 commands:
   anticrash:
-    description: ToastsAntiCrash
+    description: Anti crash reload command
     usage: /anticrash
+  allowcreative:
+    description: Allow player to use creative
+    usage: /allowcreative

@@ -10,27 +10,44 @@ import org.bukkit.entity.Player;
 public class AntiCrashCommand implements CommandExecutor {
 
     private final int TPS;
-
+    private ConfigManager configManager;
     public AntiCrashCommand(Main main) {
         TPS = (int) Main.tps;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        configManager = configManager.getInstance();
         if(sender instanceof Player){
-            if(!sender.isOp()) return false;
+            if(!sender.isOp()) {
+                sender.sendMessage(ChatColor.RED + "No.");
+                return true;
+            }
             if(args.length == 1){
                 if(args[0].equalsIgnoreCase("debug")){
-                        StringBuilder sb = new StringBuilder();
-                        sb.append(ChatColor.GOLD + "TPS: " + TPS + "\n");
-                        sb.append(ChatColor.GOLD + "Disable Elytra at: " + ConfigManager.getElytraDisableTps() + "\n");
-                        sb.append(ChatColor.GOLD + "Disable Redstone at: " + ConfigManager.getRedstoneDisableTps() + "\n");
-                        sb.append(ChatColor.GOLD + "Mob Spawn Chance: " + ConfigManager.getChanceAt(TPS) + "\n");
-                        sender.sendMessage(String.valueOf(sb));
+                        boolean bool = !(TPS <= configManager.getElytraDisableTps());
+                        boolean bool2 = TPS <= configManager.getRedstoneDisableTps();
+                        boolean bool3 = configManager.getInstance() == null;
+                        String string;
+                        if(configManager.disableSpawns()){
+                            string = ChatColor.GOLD + "Mob Spawn Chance: " + ChatColor.GREEN + "0" + " \n ";
+                        } else {
+                            string = ChatColor.GOLD + "Mob Spawn Chance: " + ChatColor.GREEN + configManager.getChanceAt(TPS) + " \n ";
+                        }
+                    String sb = ChatColor.GOLD + "ConfigManager is null? " + ChatColor.GREEN + bool3 + "\n" +
+                            ChatColor.GOLD + "\nTPS: " + ChatColor.GREEN + TPS + "\n" +
+                            ChatColor.GOLD + "Disable Elytra at: " + ChatColor.GREEN + configManager.getElytraDisableTps() + "\n" +
+                            ChatColor.GOLD + "Can Glide: " + ChatColor.GREEN + bool + "\n" +
+                            ChatColor.GOLD + "Disable Redstone at: " + ChatColor.GREEN + configManager.getRedstoneDisableTps() + "\n" +
+                            ChatColor.GOLD + "Redstone Disabled: " + ChatColor.GREEN + bool2 + "\n" + string +
+                            ChatColor.GOLD + "\nIgnored Spawns: " + "\n" + ChatColor.GREEN + configManager.ignoredSpawns() + "\n" +
+                            ChatColor.GOLD + "Allowed Creative: " + "\n" + ChatColor.GREEN + configManager.allowedCreative() + "\n" +
+                            ChatColor.GOLD + "Blocked Blocks: " + "\n" + ChatColor.GREEN + configManager.blockedBlocks();
+                    sender.sendMessage(sb + "\n");
                         return true;
                 }
                 if(args[0].equalsIgnoreCase("reload")){
-                    ConfigManager.reload();
+                    configManager.reload();
                     sender.sendMessage(ChatColor.GREEN + "Config reloaded.");
                     return true;
                 }

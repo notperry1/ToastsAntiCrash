@@ -21,7 +21,7 @@ public class IllegalEvents implements Listener {
                 if (e.getItemInHand().getType() == Material.EYE_OF_ENDER) return;
             }
             e.getItemInHand().setAmount(0);
-            e.getPlayer().sendMessage(ChatColor.RED + "Don't waste your illegals dumb fuck");
+            e.getPlayer().sendMessage(ChatColor.RED + "Don't waste your illegals dumb uck");
             e.setCancelled(true);
         }
     }

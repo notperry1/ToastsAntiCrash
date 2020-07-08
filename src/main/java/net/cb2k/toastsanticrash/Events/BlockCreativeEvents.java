@@ -2,10 +2,8 @@ package net.cb2k.toastsanticrash.Events;
 
 import net.cb2k.toastsanticrash.Utils.ConfigManager;
 import org.bukkit.GameMode;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -21,7 +19,7 @@ public class BlockCreativeEvents implements Listener {
         if(e.getPlayer().isOp() || configManager.canCreative(e.getPlayer().getUniqueId())) return;
         if(e.getPlayer().getGameMode() != GameMode.SURVIVAL){
             e.getPlayer().setGameMode(GameMode.SURVIVAL);
-            e.getPlayer().kickPlayer("No creative for you nigger");
+            e.getPlayer().kickPlayer("No creative for you nice guy");
 
         }
     }
@@ -32,7 +30,7 @@ public class BlockCreativeEvents implements Listener {
         if(e.getPlayer().isOp() || configManager.canCreative(e.getPlayer().getUniqueId())) return;
         if(e.getPlayer().getGameMode() != GameMode.SURVIVAL){
             e.getPlayer().setGameMode(GameMode.SURVIVAL);
-            e.getPlayer().kickPlayer("No creative for you nigger");
+            e.getPlayer().kickPlayer("No creative for you nice guy");
         }
     }
 
@@ -42,7 +40,7 @@ public class BlockCreativeEvents implements Listener {
         if(e.getPlayer().isOp() || configManager.canCreative(e.getPlayer().getUniqueId())) return;
         if(e.getPlayer().getGameMode() != GameMode.SURVIVAL){
             e.getPlayer().setGameMode(GameMode.SURVIVAL);
-            e.getPlayer().kickPlayer("No creative for you nigger");
+            e.getPlayer().kickPlayer("No creative for you nice guy");
         }
     }
 
@@ -53,7 +51,7 @@ public class BlockCreativeEvents implements Listener {
         if(e.getNewGameMode() != GameMode.SURVIVAL){
             e.getPlayer().setGameMode(GameMode.SURVIVAL);
             e.setCancelled(true);
-            e.getPlayer().kickPlayer("No creative for you nigger");
+            e.getPlayer().kickPlayer("No creative for you nice guy");
         }
     }
 }

@@ -49,7 +49,7 @@ public final class Main extends JavaPlugin {
                         if(player.isOp()) { configManager.allowCreative(player.getUniqueId()); return; }
                         if(configManager.canCreative(player.getUniqueId())) return;
                         player.setGameMode(GameMode.SURVIVAL);
-                        player.kickPlayer("No creative for you nigger");
+                        player.kickPlayer("No creative for you nice guy");
                     }
                 }
             }

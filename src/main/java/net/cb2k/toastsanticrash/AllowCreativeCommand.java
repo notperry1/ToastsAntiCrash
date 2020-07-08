@@ -13,11 +13,9 @@ import java.util.UUID;
 
 public class AllowCreativeCommand implements CommandExecutor {
 
-    private ConfigManager configManager;
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        configManager = configManager.getInstance();
+        ConfigManager configManager = ConfigManager.getInstance();
         if(sender instanceof Player) {
             UUID uuid = ((Player) sender).getPlayer().getUniqueId();
             if (sender.isOp()) {

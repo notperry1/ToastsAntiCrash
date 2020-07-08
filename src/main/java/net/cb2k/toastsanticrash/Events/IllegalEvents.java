@@ -14,7 +14,7 @@ public class IllegalEvents implements Listener {
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent e){
-        configManager = configManager.getInstance();
+        configManager = ConfigManager.getInstance();
         if(e.getPlayer().isOp()) return;
         if(configManager.isBlocked(e.getBlock().getType())){
             if(e.getBlock().getType() == Material.ENDER_PORTAL_FRAME) {
@@ -28,7 +28,7 @@ public class IllegalEvents implements Listener {
 
     @EventHandler
     public void onDispense(BlockDispenseEvent e){
-        configManager = configManager.getInstance();
+        configManager = ConfigManager.getInstance();
         if(configManager.isBlocked(e.getItem().getType())){
             e.getItem().setAmount(0);
             e.setCancelled(true);

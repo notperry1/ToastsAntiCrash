@@ -17,7 +17,7 @@ public class BlockCreativeEvents implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
-        configManager = configManager.getInstance();
+        configManager = ConfigManager.getInstance();
         if(e.getPlayer().isOp() || configManager.canCreative(e.getPlayer().getUniqueId())) return;
         if(e.getPlayer().getGameMode() != GameMode.SURVIVAL){
             e.getPlayer().setGameMode(GameMode.SURVIVAL);
@@ -28,7 +28,7 @@ public class BlockCreativeEvents implements Listener {
 
     @EventHandler
     public void onWorldChange(PlayerChangedWorldEvent e){
-        configManager = configManager.getInstance();
+        configManager = ConfigManager.getInstance();
         if(e.getPlayer().isOp() || configManager.canCreative(e.getPlayer().getUniqueId())) return;
         if(e.getPlayer().getGameMode() != GameMode.SURVIVAL){
             e.getPlayer().setGameMode(GameMode.SURVIVAL);
@@ -38,7 +38,7 @@ public class BlockCreativeEvents implements Listener {
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e){
-        configManager = configManager.getInstance();
+        configManager = ConfigManager.getInstance();
         if(e.getPlayer().isOp() || configManager.canCreative(e.getPlayer().getUniqueId())) return;
         if(e.getPlayer().getGameMode() != GameMode.SURVIVAL){
             e.getPlayer().setGameMode(GameMode.SURVIVAL);
@@ -48,7 +48,7 @@ public class BlockCreativeEvents implements Listener {
 
     @EventHandler
     public void onGamemodeChange(PlayerGameModeChangeEvent e){
-        configManager = configManager.getInstance();
+        configManager = ConfigManager.getInstance();
         if(e.getPlayer().isOp() || configManager.canCreative(e.getPlayer().getUniqueId())) return;
         if(e.getNewGameMode() != GameMode.SURVIVAL){
             e.getPlayer().setGameMode(GameMode.SURVIVAL);

@@ -14,7 +14,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class ConfigManager {
-    private ConfigManager configManager;
+    private static ConfigManager configManager;
     private final int TPS;
     private static Plugin plugin;
     private FileConfiguration config;
@@ -76,7 +76,7 @@ public class ConfigManager {
         return config.getString("config-version");
     }
 
-    public ConfigManager getInstance() {
+    public static ConfigManager getInstance() {
         if(configManager == null) {
             configManager = new ConfigManager(plugin);
         }

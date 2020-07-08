@@ -13,7 +13,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerToggleSprintEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -33,7 +32,7 @@ public class ElytraEvent implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onGlide(EntityToggleGlideEvent event) {
-        configManager = configManager.getInstance();
+        configManager = ConfigManager.getInstance();
         if(configManager.getElytraDisableTps() == -1) return;
         if(TPS <= configManager.getElytraDisableTps()) {
             if (event.getEntity().getType().equals(EntityType.PLAYER))
@@ -46,7 +45,7 @@ public class ElytraEvent implements Listener {
     }
 
     private void dequipElytra(Player player) {
-        configManager = configManager.getInstance();
+        configManager = ConfigManager.getInstance();
         if(configManager.getElytraDisableTps() == -1) return;
         if (TPS <= configManager.getElytraDisableTps()) {
             PlayerInventory i = player.getInventory();
@@ -69,7 +68,7 @@ public class ElytraEvent implements Listener {
 
     @EventHandler
     public void onPlayerInteractEvent(PlayerInteractEvent e) {
-        configManager = configManager.getInstance();
+        configManager = ConfigManager.getInstance();
         PlayerInventory inv = e.getPlayer().getInventory();
         int timeLeft = cooldownManager.getCooldown(e.getPlayer());
 

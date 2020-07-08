@@ -12,11 +12,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class MobSpawnEvent implements Listener {
 
-    private  ConfigManager configManager;
-
     @EventHandler(priority = EventPriority.HIGHEST)
     public void SpawnEvent(EntitySpawnEvent e) {
-        configManager = configManager.getInstance();
+        ConfigManager configManager = ConfigManager.getInstance();
         if(configManager.disableSpawns()){
 //            if(configManager.isIgnored(e.getEntity())) return;
             e.setCancelled(true);

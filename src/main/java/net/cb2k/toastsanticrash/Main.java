@@ -17,7 +17,7 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         instance = this;
         new ConfigManager(this);
-        configManager = configManager.getInstance();
+        configManager = ConfigManager.getInstance();
 
         getServer().getPluginManager().registerEvents(new ElytraEvent(this), this);
         getServer().getPluginManager().registerEvents(new RedstoneEvent(this), this);

@@ -10,14 +10,14 @@ import org.bukkit.entity.Player;
 public class AntiCrashCommand implements CommandExecutor {
 
     private final int TPS;
-    private ConfigManager configManager;
+
     public AntiCrashCommand(Main main) {
         TPS = (int) Main.tps;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        configManager = configManager.getInstance();
+        ConfigManager configManager = ConfigManager.getInstance();
         if(sender instanceof Player){
             if(!sender.isOp()) {
                 sender.sendMessage(ChatColor.RED + "No.");
@@ -27,7 +27,7 @@ public class AntiCrashCommand implements CommandExecutor {
                 if(args[0].equalsIgnoreCase("debug")){
                         boolean bool = !(TPS <= configManager.getElytraDisableTps());
                         boolean bool2 = TPS <= configManager.getRedstoneDisableTps();
-                        boolean bool3 = configManager.getInstance() == null;
+                        boolean bool3 = ConfigManager.getInstance() == null;
                         String string;
                         if(configManager.disableSpawns()){
                             string = ChatColor.GOLD + "Mob Spawn Chance: " + ChatColor.GREEN + "0" + " \n ";
